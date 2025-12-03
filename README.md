@@ -26,14 +26,14 @@ graph TD
 
     A --> H{方案2: 逆向 Web API};
     H --> I[分析 login10.js & des.js];
-    I --> J[发现前端加密逻辑: DES(user+pwd+lt)];
+    I --> J["发现前端加密逻辑: DES(user+pwd+lt)"];
     J --> K[构造请求尝试 CAS 登录];
     K -->|结果| L[登录成功，但需要维持 Session，流程繁琐];
 
     A --> M{方案3: 寻找后门/旧接口};
     M --> N[分析旧版 PHP 项目源码];
-    N --> O[发现旧 API: JNUService.asmx/Login];
-    O --> P[分析旧加密: AES(RoomName)];
+    N --> O["发现旧 API: JNUService.asmx/Login"];
+    O --> P["分析旧加密: AES(RoomName)"];
     P --> Q[尝试直接调用旧 API];
     Q -->|惊喜| R[**成功!** 服务器未关闭旧接口，且绕过了 CAS];
     R --> S[**最终方案: V13 Retro 版**];
